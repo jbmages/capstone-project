@@ -1,10 +1,10 @@
+import os
+import kagglehub
+import shutil
+
 def dataset_download():
     # Download dataset from kagglehub
     path = kagglehub.dataset_download("tunguz/big-five-personality-test")
-    print(path)
-    print("Dataset path:", path)
-
-    # Specify target directory for data
     target_folder = 'Data/'
     os.makedirs(target_folder, exist_ok=True)
 
