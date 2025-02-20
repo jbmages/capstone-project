@@ -5,3 +5,4 @@ shutil
 os
 seaborn
 plotly
+scikit-learn
