@@ -4,3 +4,4 @@ kagglehub
 shutil
 os
 seaborn
+plotly
