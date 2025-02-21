@@ -6,3 +6,6 @@ os
 seaborn
 plotly
 scikit-learn
+pycountry
+pypi
+geodatasets
