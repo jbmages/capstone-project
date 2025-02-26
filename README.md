@@ -4,6 +4,26 @@ Julian Benitez Mages & Anaelle Surprise
 
 ![](images/image-26380211.png)\
 
+## Data Setup
+To setup your environment to run our model, you must complete the following steps.
+1. Clone the repository
+```
+git clone <repository_url>
+cd <repository_name>
+```
+2. Install all necessary dependencies and system requirements
+```
+# in the command line of your environment 
+pip install -r requirements.txt
+```
+3. Download the data
+
+```
+from data_download import dataset_download
+
+dataset_download()
+```
+4. Setup model
 ## Background & Context
 
 The Big Five personality traits, known as the Five Factor Model, has emerged as one of the best models with which to measure and study personality. The model emerged from analyzing natural language used to describe individuals, and resulted in the following five key traits: Openness, Contientiousness, Extraversion, Agreeableness, and Neuroticism.
@@ -31,3 +51,5 @@ We then normalize the data types to numeric, and remove rows where there is more
 We then implemented the trait scoring method as provided by the IPIP website, and add five new columns to our dataset to keep track of the overall trait scores. These are calculated using matrix multiplication to compute weighted sums. Lastly, we moved \~1000 rows of data where there are instances of NaN values in the survey results columns, as these would not be adequate for modeling and analysis.
 
 ## Exploratory Data Analysis
+
+## How to Train & Evaluate the Model
