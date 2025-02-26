@@ -1,55 +1,99 @@
-# Personality Clustering, Modelling and Analysis
+# Personality Clustering, Modeling, and Analysis
 
-Julian Benitez Mages & Anaelle Surprise
+**Julian Benitez Mages & Anaelle Surprise**
 
-![](images/image-26380211.png)\
+![](images/image-26380211.png)
 
 ## Data Setup
-To setup your environment to run our model, you must complete the following steps.
-1. Clone the repository
-```
-git clone <repository_url>
-cd <repository_name>
-```
-2. Install all necessary dependencies and system requirements
-```
-# in the command line of your environment 
-pip install -r requirements.txt
-```
-3. Download the data
 
-```
-from data_download import dataset_download
+To set up your environment to run our model, follow these steps:
 
-dataset_download()
-```
-4. Setup model
+1. Clone the repository:
+   ```
+   git clone <repository_url>
+   cd <repository_name>
+   ```
+2. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+3. Run data_processing notebook:
+   ```
+   First cells download data locally
+   Notebook puts data into format for EDA and ML
+   ```
+
+---
 ## Background & Context
 
-The Big Five personality traits, known as the Five Factor Model, has emerged as one of the best models with which to measure and study personality. The model emerged from analyzing natural language used to describe individuals, and resulted in the following five key traits: Openness, Contientiousness, Extraversion, Agreeableness, and Neuroticism.
+The **Big Five Personality Traits**, or **Five Factor Model**, is one of the most widely accepted frameworks for studying personality. It emerged from analyzing natural language descriptions of people and consists of five key traits:
+- **Openness**
+- **Conscientiousness**
+- **Extraversion**
+- **Agreeableness**
+- **Neuroticism**
 
-The International Personality Item Pool (IPIP) is among the most common and standardized resource for measuring one's scores of each trait of the Big Five. The self-report inventory involves answering a series of 50 questions, with ten serving to analyze each trait. Each question comes in the form of a personality characteristic, with the user asked to score their relatedness on a scale of one to five. The questions are divided roughly evenly between positive and negative correlation to the corresponding personality trait.
+The **International Personality Item Pool (IPIP)** is a widely used self-report inventory that measures these traits through a set of 50 questions. Each question is rated on a scale from 1 to 5, with half positively and half negatively correlated to the corresponding trait.
 
-Our dataset contains 1,015,342 sets of answers to the IPIP inventory, collected between 2016 and 2018. Each row also contains the user's country, approximate latitude and longitude, screen size, and time spent answering each page of the website, including measures for each question.
+Our dataset contains **1,015,342 responses** to the IPIP inventory collected between 2016 and 2018. Each entry includes additional metadata such as the respondent's country, approximate latitude and longitude, screen size, and time spent answering each page.
 
-## Our Objective
+---
+## Objective & Research Questions
 
-We would like to utilize machine learning to better understand groupings of personality. While the IPIP scores the survey results to provide raw scores and percentile indicators (first figure), these are simply calculated by adding up the values indicated with each answer for each trait.
+### Key Question: **Do distinct personality clusters exist within the Big Five framework?**
+The Big Five model suggests that personality is a continuous spectrum rather than a set of discrete categories like the **Myers-Briggs Type Indicator (MBTI)**. However, clustering techniques may reveal underlying patterns or structures within the data that suggest recurring personality groupings.
 
-We would like to use clustering techniques to better analyze the survey answers, and take advantage of the ancillary data to model for the respondents' countries, and derive associations between time spent answering the questions. Neural network models could also be used to investigate associations between answers to certain questions among topics in determining overall personality, and cluser.
+### Additional Goals:
+1. **Clustering Personality Traits:** Identify whether natural groupings exist in the dataset that suggest distinct personality profiles.
+2. **Survey Response Modeling:** Analyze response times and patterns to determine their correlation with personality traits and country of origin.
+3. **Predicting Geographic Location:** Use supervised machine learning to predict a respondent's country based on their personality profile and response behavior.
+4. **LLM Interpretation:** Leverage large language models (LLMs) to provide natural language descriptions of identified personality clusters, making the findings more interpretable.
 
-We could also like to create supervised ML models to predict country as well as lat/long. This model could be used in a front-end interface where users would be able to complete the survey on our site, and the model would then list the predicted country.
+---
+## Data Pre-Processing
 
-Lastly, we would like to use LLM's to describe the meaning of each cluster of personalities. This would be insightful in the context of users taking the personality inventory.
+Our preprocessing pipeline includes:
+- **Data Cleaning:** Removing duplicate responses from the same IP address, as recommended by the dataset’s original curator.
+- **Normalization:** Converting responses to numerical format and computing standardized trait scores using IPIP guidelines.
+- **Handling Missing Values:** Removing ~1,000 rows with NaN values in survey responses.
+- **Feature Engineering:** Adding calculated trait scores and response time features.
 
-## Data Pre-Processing Steps
+---
+## Exploratory Data Analysis (EDA)
 
-In our early stages of data pre-processing, there were several steps taken to prepare the data for analysis. Firstly, we download the data from Kaggle using the kagglehub package, and implement the correct column structure using splicing.
+Our EDA included:
+- **Distribution Analysis:** Visualizing the distribution of trait scores across the dataset.
+- **Correlation Analysis:** Generating a heatmap of question-level response correlations.
+- **Geographic Analysis:** Mapping the number of survey respondents by country.
+- **Clustering Feasibility:** Conducting dimensionality reduction and initial cluster exploration using methods such as PCA and t-SNE.
 
-We then normalize the data types to numeric, and remove rows where there is more than one survey taken under the same IP Adress. This follows the recommendation from the data's Kaggle page, as the user explains that high values of this row may indicate large amounts of users taking the survey on the same network, such as university students.
+---
+## Clustering Insights
 
-We then implemented the trait scoring method as provided by the IPIP website, and add five new columns to our dataset to keep track of the overall trait scores. These are calculated using matrix multiplication to compute weighted sums. Lastly, we moved \~1000 rows of data where there are instances of NaN values in the survey results columns, as these would not be adequate for modeling and analysis.
+We investigated whether clustering techniques could reveal distinct "personality types" within the Big Five framework. Traditional models like MBTI assume a fixed set of 16 personality categories, whereas the Big Five model suggests a continuous personality spectrum. Our clustering analysis tested whether **discrete personality clusters naturally emerge** or if personality exists as a **gradual blend of traits.**
 
-## Exploratory Data Analysis
+Key steps in our clustering approach:
+1. **Dimensionality Reduction:** Applied PCA and t-SNE to reduce feature space while preserving meaningful variance.
+2. **Clustering Methods:** Used K-Means, DBSCAN, and Hierarchical Clustering to analyze potential groupings.
+3. **Cluster Interpretation:** Evaluated cluster consistency and examined whether they align with theoretical expectations.
+4. **Cluster Explanation with LLMs:** Generated natural language descriptions of clusters using an LLM to improve interpretability.
 
-## How to Train & Evaluate the Model
+---
+## Next Steps
+
+- **Fine-tune clustering models** to validate whether personality clusters remain stable across different algorithms.
+- **Refine supervised learning models** to enhance geographic prediction accuracy.
+- **Deploy an interactive front-end** where users can take the survey and receive predictions about their personality grouping and location.
+- **Expand LLM integration** to generate more nuanced personality insights.
+
+---
+## Related Research Papers & References
+
+To support our work, we reviewed relevant literature on personality clustering and predictive modeling:
+
+
+---
+## Conclusion
+
+This project bridges machine learning, psychology, and natural language processing to investigate personality clustering. By applying advanced ML techniques to a large dataset, we aim to uncover whether personality naturally forms clusters or remains a fluid, multidimensional space.
+
