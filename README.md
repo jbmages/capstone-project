@@ -2,7 +2,9 @@
 
 **Julian Benitez Mages & Anaelle Surprise**
 
-![](images/image-26380211.png)
+![](images/image-26380211.png)\
+
+![](images/quiz_results.jpg)\
 
 ## Data Setup
 
