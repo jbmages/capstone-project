@@ -1,11 +1,11 @@
 pandas
-matplotlib.pyplot
+matplotlib
 kagglehub
-shutil
-os
 seaborn
 plotly
 scikit-learn
 pycountry
 pypi
 geodatasets
+pycountry
+plotly.express 
